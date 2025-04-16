@@ -1,0 +1,26 @@
+name: Autograde HTML+CSS Bug Fix
+
+on:
+  push:
+    paths:
+      - "**.html"
+      - "**.css"
+  workflow_dispatch:
+
+jobs:
+  grade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install beautifulsoup4
+
+      - name: Run autograder
+        run: |
+          python grade.py
